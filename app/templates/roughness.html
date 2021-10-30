@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+<html>
+    <head>
+        <title>Home page</title>
+    </head>
+    <body>
+        {% block content %}
+
+                {% for img in images|sort(reverse=True, attribute='roughness') %}
+                <br/>
+                <div class="container">
+                        <table class="table table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                  <th scope="col">{{img['name']}}</th>
+                                  <th scope="col">Coarseness</th>
+                                  <th scope="col">Contrast</th>
+                                  <th scope="col">Directionality</th>
+                                  <th scope="col">Line-likeliness</th>
+                                  <th scope="col" class="table-active">Roughness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="{{url_for('static', filename=img['name'])}}"  width="120" height="120"></td>
+                                    <td>{{img['coarseness'] | round(6)}}</td>
+                                    <td>{{img['contrast'] | round(6)}}</td>
+                                    <td>{{img['directionality'] | round(6)}}</td>
+                                    <td>{{img['line_likeliness'] | round(6)}}</td>
+                                    <td class="table-active">{{img['roughness'] | round(6)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+
+                {% endfor %}
+        {% endblock %}
+    </body>
+</html>
