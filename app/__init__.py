@@ -1,22 +1,24 @@
 from flask import Flask, render_template
 from visual_features import features
 from PIL import Image
-from pprint import pprint
 import glob
 
 app = Flask(__name__)
 
 dati = glob.glob("/home/dario/wsgi/app/static/*")
 data = []
+images = []
 
+print(dati)
+
+# creo una lista di dizionari, dove ogni dizionario è composto dal percorso dell'immagine e dal suo relativo nome
 for i in dati:
     dict = {}
     dict['path'] = i
     dict['name'] = i[28:]
     data.append(dict)
 
-images = []
-
+# creo una lista di dizionari images, dove i campi di ogni dizionario inzicano i valori dei descrittori per ogni singola immagine
 for img in data:
     image = {}
     img_obj = Image.open(img['path'])

@@ -17,7 +17,7 @@ def feature_directionality(img, n=12):
     array_greyscale = image_array_in_greyscale(img)
     gx = sobel(array_greyscale, 1)  # horizontal gradient
     gy = sobel(array_greyscale, 0)  # vertical gradient
-    theta = np.arctan2(gy, gx)  # estremi ok
+    theta = np.arctan2(gy, gx)
     discrete_thetas = ((theta + np.pi) / (2 * np.pi)) * n
     x = discrete_thetas.astype(int) % n
     p_theta = np.bincount(x.flatten(), minlength=12) / x.size
@@ -47,7 +47,7 @@ def feature_line_likeliness(img, n=12, d=4):
     d_vector = [[0, d], [-d, d], [-d, 0], [-d, -d]]
     gx = sobel(array_greyscale, 1)  # horizontal gradient
     gy = sobel(array_greyscale, 0)  # vertical gradient
-    theta = np.arctan2(gy, gx)  # estremi ok
+    theta = np.arctan2(gy, gx)
     discrete_thetas = ((theta + np.pi) / (2 * np.pi)) * n
     x = discrete_thetas.astype(int) % n
 
@@ -86,7 +86,7 @@ def feature_coarseness(img, K=4):
     ak = []
     for k in range(1, K + 1):
         radius = ((2 ** k) - 1) / 2
-        tmp_img = img_grey.filter(ImageFilter.BoxBlur(radius)) # verificare padding con immagine chiara
+        tmp_img = img_grey.filter(ImageFilter.BoxBlur(radius))
         data = np.asarray(tmp_img) / 255
 
         #H/V difference
@@ -121,7 +121,7 @@ def feature_roughness(img):
 
 def feature_contrast(img, n=1 / 4):
     array_greyscale = image_array_in_greyscale(img)
-    mu4 = moment(array_greyscale, moment=4, axis=None)  # momento centrale del 4 ordine
+    mu4 = moment(array_greyscale, moment=4, axis=None)  # momento centrale del 4° ordine
     std = np.std(array_greyscale)
     if std == 0:
         return 0.
