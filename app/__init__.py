@@ -9,8 +9,6 @@ dati = glob.glob("/home/dario/wsgi/app/static/*")
 data = []
 images = []
 
-print(dati)
-
 # creo una lista di dizionari, dove ogni dizionario è composto dal percorso dell'immagine e dal suo relativo nome
 for i in dati:
     dict = {}
